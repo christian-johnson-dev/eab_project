@@ -1,0 +1,31 @@
+This is a boilerplate for a Flask environment on Christian Johnson's mac.
+
+no pip files shoul be in this at the start
+
+
+Steps
+1. Copy this containing folder to the new location and RENAME IT.
+2. Open terminal and navigate to the renamed folder.  Make sure the terminal says that you are in the correct folder.
+3. in terminal enter 
+
+    pipenv install flask PyMySQL flask-bcrypt
+
+This will install the correct pip files in the renamed folder.
+
+
+4. Activate virtual environment with the following in terminal.
+
+    pipenv shell
+
+5. check inventory of Flask files by running
+
+    pip list
+
+
+6. run the python file from the terminal
+
+    python3 server.py
+
+7. When finished exit the server by running
+
+    exit

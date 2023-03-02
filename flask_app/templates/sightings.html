@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EAB | Sightings</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='googlemaps.js') }}"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+</head>
+
+<body>
+    <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class='navbar-brand' href=""><img class="logo" src="{{ url_for('static', filename='images/eab.jpg') }}"
+                    alt="eab logo" srcset=""></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" href="/">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/sightings">Report a Sighting</a>
+                    <a class="nav-link" href="/learn_more">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Sightings</h1>
+        <div class="row">
+            <div class="col-md-6" id="mainMap">
+                <!-- <div style="overflow:hidden;resize:none;max-width:100%;width:500px;height:500px;"> -->
+                    <div id="map"></div>
+                
+                <!-- <div id="my-map-display" style="height:100%; width:100%;max-width:100%;">
+                    <iframe style="height:100%;width:100%;border:0;" frameborder="0"
+                        src="https://www.google.com/maps/embed/v1/place?q=McMenamins+Crystal+Ballroom,+West+Burnside+Street,+Portland,+OR,+USA&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
+                </div> -->
+                <!-- </div> -->
+            </div>
+            <div class="col-md-6" id="mapListing">
+                <button class="btn btn-primary shadow" type="button" data-bs-target="#sightingModalOne"
+                    data-bs-toggle="modal">Report a Sighting</button>
+                <div class="table-container">
+                    <table class="table table-responsive table-striped sightings-table">
+                        {% for one_sighting in all_sightings %}
+                        <tr class="row results-row">
+                            <td class="col">
+                                <img class="row-img" src="{{ url_for('static', filename='img/' + one_sighting.filename) }}"
+                                    alt="emerald ash borer sighting" ">
+                            </td>
+                            <td class=" col-7">
+                                <h5>{{one_sighting.city}}, {{one_sighting.state}}</h5>
+                                <small>{{one_sighting.description}}</small>
+                            </td>
+                            <td class="col">
+                                <p>{{one_sighting.date}}</p>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+
+    <form action="/sightings/create" method="post" autocomplete="off" enctype="multipart/form-data">
+        <!-- ? --------------------------   MODAL WINDOW 1 IDENTIFICATION   ------------------------------------>
+        <div class="modal fade" id="sightingModalOne">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <ul class="nav">
+                            <li class="nav-item"> <a class="nav-link active" href="" data-bs-toggle="modal"
+                                    data-bs-target="#sightingModalOne">Identify</a></li>
+                            <li class="nav-item"><a class="nav-link" href="" data-bs-toggle="modal"
+                                    data-bs-target="#sightingModalTwo">Locate</a> </li>
+                            <li class="nav-item"><a class="nav-link" href="" data-bs-toggle="modal"
+                                    data-bs-target="#sightingModalThree"> Describe</a></li>
+                        </ul>
+                        <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <!--**============== CAROUSEL  ======================-->
+                        <div id="carouselDarkVariant" class="carousel slide w-100 carousel-dark">
+                            <div class="carousel-inner">
+
+                                <!--**-----------CAROUSEL SLIDE 1------------------>
+                                <div class="carousel-item active">
+                                    <div class="carousel-wrapper row">
+                                        <div class="col-7">
+                                            <img class="w-100"
+                                                src="{{ url_for('static', filename='images/ash-leaves.jpg') }}" alt="">
+                                        </div>
+                                        <div class="col-5">
+                                            <h5>Ash tree idntification</h5>
+                                            <ul>
+                                                <li>EABs are only found on Ash trees</li>
+                                                <li>Note the leaves grow directly opposite of eachother along the branch
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--**-----------CAROUSEL SLIDE 2------------------>
+                                <div class="carousel-item">
+                                    <div class="carousel-wrapper row">
+                                        <div class="col-md-7">
+                                            <img class="w-100"
+                                                src="{{ url_for('static', filename='images/crown.jpg') }}" alt="">
+                                        </div>
+                                        <div class="col-md-5">
+                                            <h5>Common Ash tree damage</h5>
+                                            <ul>
+                                                <li>Significant leaf dieback on the entire tree</li>
+                                                <li>Shoots sprouting up from the base of the tree</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--**-----------CAROUSEL SLIDE 3------------------>
+                                <div class="carousel-item">
+                                    <div class="carousel-wrapper row">
+                                        <div class="col-md-7">
+                                            <img class="w-100"
+                                                src="{{ url_for('static', filename='images/holes.jpg') }}" alt="">
+                                        </div>
+                                        <div class="col-md-5">
+                                            <h5>External infestation signs</h5>
+                                            <ul>
+                                                <li>D-shaped holes where newly-matured beetles exit from the bark</li>
+                                                <li>S-pattern under bark-dieback</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--**-----------CAROUSEL SLIDE 4------------------>
+                                <div class="carousel-item">
+                                    <div class="carousel-wrapper row">
+                                        <div class="col-md-7">
+                                            <img class="w-100" src="{{ url_for('static', filename='images/EAB1.jpg') }}"
+                                                alt="">
+                                        </div>
+                                        <div class="col-md-5">
+                                            <h5>Insect identification</h5>
+                                            <ul>
+                                                <li>Mature EAB are only 1/2"-1" long</li>
+                                                <li>Larvae look like larvae</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselDarkVariant"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselDarkVariant"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="false"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                        <!--**============== END OF CAROUSEL  ======================-->
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="button" data-bs-toggle="modal"
+                            data-bs-target="#sightingModalTwo">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ? --------------------------   MODAL WINDOW 2 LOCATION   ------------------------------------>
+        <div class="modal" id="sightingModalTwo">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <ul class="nav">
+                            <li class="nav-item"> <a class="nav-link " href="" data-bs-toggle="modal"
+                                    data-bs-target="#sightingModalOne">Identify</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="" data-bs-toggle="modal"
+                                    data-bs-target="#sightingModalTwo">Locate</a> </li>
+                            <li class="nav-item"><a class="nav-link" href="" data-bs-toggle="modal"
+                                    data-bs-target="#sightingModalThree"> Describe</a></li>
+                        </ul>
+                        <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row map-row">
+                            <div class="col-6">
+                                <fieldset>
+                                    <legend>Approximate Address:</legend>
+                                    <div class="md-3">
+                                        <label for="address" class="form-label">Address</label>
+                                        <input type="text" class="form-control" name="address" id="address">
+                                    </div>
+                                    <div class="md-3">
+                                        <label for="city" class="form-label">City</label>
+                                        <input type="text" class="form-control" name="city" id="city">
+                                    </div>
+                                    <div class="md3">
+                                        <label for="state" class="form-label">State</label>
+                                        <input type="text" class="form-control" name="state" id="state">
+                                    </div>
+                                    <div class="md3">
+                                        <label for="zip" class="form-label">Zip</label>
+                                        <input type="text" class="form-control" name="zip" id="zip">
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-6">
+                                <div>Location Descrption</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="button" data-bs-toggle="modal"
+                            data-bs-target="#sightingModalThree">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ? --------------------------   MODAL WINDOW 3 DESCRIPTION  ------------------------------------>
+        <div class="modal" id="sightingModalThree">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <ul class="nav">
+                            <li class="nav-item"> <a class="nav-link" href="" data-bs-toggle="modal"
+                                    data-bs-target="#sightingModalOne">Identify</a></li>
+                            <li class="nav-item"><a class="nav-link" href="" data-bs-toggle="modal"
+                                    data-bs-target="#sightingModalTwo">Locate</a> </li>
+                            <li class="nav-item"><a class="nav-link" href="" data-bs-toggle="modal"
+                                    data-bs-target="#sightingModalThree active"> Describe</a></li>
+                        </ul>
+                        <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row map-row">
+                            <div class="col">
+                                <label for="formFile" class="form-label">Upload a photo:</label>
+                                <input name="file" class="form-control" type="file" id="formFileMultiple" multiple />
+                            </div>
+                            <div class="col">
+                                <div class="md-3"><label for="date" class="form-label">Date:</label>
+                                    <input type="date" name="date" id="datePick">
+                                </div>
+                                <div class="md-3"><label class="form-label" for="description">Description</label>
+                                    <textarea class="form-control" name="description" id="description"
+                                        placeholder="A brief description of tree damage, EAB quantity, etc.."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- ! This is the SUBMIT button for the entire form -->
+                        <button class="btn btn-primary" type="submit" data-bs-toggle="modal"
+                            data-bs-target="#sightingModalFive">Submit!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ? --------------------------   MODAL WINDOW 4 SUBMIT   ------------------------------------>
+        <!-- <div class="modal" id="sightingModalFour">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <ul class="nav">
+                            <li class="nav-item"> <a class="nav-link" href="" data-bs-toggle="modal"
+                                    data-bs-target="#sightingModalOne">Identify</a></li>
+                            <li class="nav-item"><a class="nav-link" href="" data-bs-toggle="modal"
+                                    data-bs-target="#sightingModalTwo">Locate</a> </li>
+                            <li class="nav-item"><a class="nav-link" href="" data-bs-toggle="modal"
+                                    data-bs-target="#sightingModalThree"> Describe</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="" data-bs-toggle="modal"
+                                    data-bs-target="#sightingModalFour">Submit</a></li>
+                        </ul>
+                        <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">Summary GOES HERE</div>
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+
+
+    </form>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjgNOhSNKvF0tYociAbjqoFuPIhi46JKw&callback=initMap&v=weekly"
+        defer>
+        </script>
+
+</body>
+
+</html>

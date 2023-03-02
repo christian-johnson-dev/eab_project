@@ -1,0 +1,159 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.modal-body {
+    display: flex;
+    min-height: 350px;
+}
+
+.learn-more-hero {
+    width: 50%;
+}
+
+
+
+/* .column-gap {
+    gap: 30px;
+} */
+
+#mainMap {
+    height: 400px;
+    /* background-color: blueviolet; */
+}
+
+#mapListing {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#mapListing button {
+    max-width: 200px;
+    margin: 20px auto;
+
+}
+.table-container {
+    width: 100%;
+    max-height: 300px;
+    overflow-y:scroll;
+}
+.sightings-table {
+    
+}
+.carousel-wrapper {
+    width: 70%;
+    display: flex;
+    margin: 40px auto;
+}
+
+.modal-header .nav {
+    /* background-color: blue; */
+    margin: 0 auto;
+}
+
+
+.modal-header .nav ul li a {
+    color: black;
+
+}
+
+.modal-header .nav .active {
+    font-weight: 800;
+    text-decoration: underline;
+
+}
+/* .modal-body .row {
+    width: 100%;
+    background-color: aqua;
+} */
+.navbar {
+    background-color: #fff;
+}
+.green {
+    background-image: url("images/cover.png");
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+.quote-card {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    width: 60%;
+    padding: 15px;
+
+}
+.modal-body .map-row {
+    width: 100%;}
+
+.row-img {
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+
+}
+
+footer .container {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-title {
+    margin: 0 auto;
+}
+
+
+.footer-links {
+    margin: 0 auto;
+}
+
+
+.logo {
+    height: 60px;
+}
+
+
+#learn-more-main {
+    background-image: url("images/s-trails.jpg");
+    height: 300px;
+}
+
+#map {
+    height: 100%;
+}
+
+.text-card {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+}
+
+.custom-map-control-button {
+    background-color: #fff;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+    margin: 10px;
+    padding: 0 0.5em;
+    font: 400 18px Roboto, Arial, sans-serif;
+    overflow: hidden;
+    height: 40px;
+    cursor: pointer;
+}
+
+.custom-map-control-button:hover {
+    background: rgb(235, 235, 235);
+}
