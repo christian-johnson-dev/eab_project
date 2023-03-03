@@ -34,20 +34,15 @@
     </nav>
 
     <div class="container">
-        <h1>Sightings</h1>
+        <h1>Emerald Ash Borer Sightings</h1>
         <div class="row">
             <div class="col-md-6" id="mainMap">
-                <!-- <div style="overflow:hidden;resize:none;max-width:100%;width:500px;height:500px;"> -->
+
                     <div id="map"></div>
-                
-                <!-- <div id="my-map-display" style="height:100%; width:100%;max-width:100%;">
-                    <iframe style="height:100%;width:100%;border:0;" frameborder="0"
-                        src="https://www.google.com/maps/embed/v1/place?q=McMenamins+Crystal+Ballroom,+West+Burnside+Street,+Portland,+OR,+USA&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
-                </div> -->
-                <!-- </div> -->
+
             </div>
             <div class="col-md-6" id="mapListing">
-                <button class="btn btn-primary shadow" type="button" data-bs-target="#sightingModalOne"
+                <button class="lead-button bluegreen-button shadow" type="button" data-bs-target="#sightingModalOne"
                     data-bs-toggle="modal">Report a Sighting</button>
                 <div class="table-container">
                     <table class="table table-responsive table-striped sightings-table">
@@ -179,7 +174,6 @@
                             </button>
                         </div>
                         <!--**============== END OF CAROUSEL  ======================-->
-
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-primary" type="button" data-bs-toggle="modal"
@@ -207,6 +201,14 @@
                     <div class="modal-body">
                         <div class="row map-row">
                             <div class="col-6">
+                                <div style="text-decoration:none; overflow:hidden;max-width:100%;width:400px;height:400px;">
+                                    <div id="google-maps-canvas" style="height:100%; width:100%;max-width:100%;"><iframe
+                                            style="height:100%;width:100%;border:0;" frameborder="0"
+                                            src="https://www.google.com/maps/embed/v1/place?q=Portland,+OR,+USA&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
                                 <fieldset>
                                     <legend>Approximate Address:</legend>
                                     <div class="md-3">
@@ -226,9 +228,6 @@
                                         <input type="text" class="form-control" name="zip" id="zip">
                                     </div>
                                 </fieldset>
-                            </div>
-                            <div class="col-6">
-                                <div>Location Descrption</div>
                             </div>
                         </div>
                     </div>
